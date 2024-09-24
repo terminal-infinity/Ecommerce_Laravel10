@@ -8,11 +8,7 @@
     <!-- Navbar Start -->
      @include('frontend.partials.navbar')
     <!-- Navbar End -->
-
-	<!-- Cart -->
-    @include('frontend.partials.header')
-
-
+	
     @yield('content')
 
 

@@ -137,8 +137,8 @@
                                     @foreach ($size as $sizes)
                                     @if($sizes != '')
                                     <label style="font-weight: normal;" for="colour">
-                                        <input type="checkbox" name="size[]" value="{{ $sizes->size }}">
-                                        @if(in_array($sizes->size, $selectedSize)) checked @endif
+                                        <input type="checkbox" name="size[]" value="{{ $sizes->size }}" 
+                                        @if(in_array($sizes->size, $selectedSize)) checked @endif>
                                         {{ $sizes->size }}
                                     </label>
                                     @endif

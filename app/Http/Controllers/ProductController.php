@@ -47,7 +47,7 @@ class ProductController extends Controller
             $manager = new ImageManager(new Driver());
             $name_gen = hexdec(uniqid()).'.'.$takeimage->getClientOriginalExtension();
             $img = $manager->read($takeimage);
-            $img->resize(3279, 1886);
+            $img->resize(620, 392);
             $img->toJpeg(80)->save(public_path('categoryimage/'.$name_gen));
 
             $data->image = $name_gen;
@@ -85,7 +85,7 @@ class ProductController extends Controller
             $manager = new ImageManager(new Driver());
             $name_gen = hexdec(uniqid()).'.'.$takeimage->getClientOriginalExtension();
             $img = $manager->read($takeimage);
-            $img->resize(3279, 1886);
+            $img->resize(620, 392);
             $img->toJpeg(80)->save(public_path('categoryimage/'.$name_gen));
 
             $data->image = $name_gen;
@@ -425,7 +425,7 @@ class ProductController extends Controller
             $manager = new ImageManager(new Driver());
             $name_gen = hexdec(uniqid()).'.'.$takeimage->getClientOriginalExtension();
             $img = $manager->read($takeimage);
-            $img->resize(12000, 1485);
+            $img->resize(600, 750);
             $img->toJpeg(80)->save(public_path('productimage/'.$name_gen));
 
             $data->image = $name_gen;
@@ -493,7 +493,7 @@ class ProductController extends Controller
             $manager = new ImageManager(new Driver());
             $name_gen = hexdec(uniqid()).'.'.$takeimage->getClientOriginalExtension();
             $img = $manager->read($takeimage);
-            $img->resize(12000, 1485);
+            $img->resize(600, 750);
             $img->toJpeg(80)->save(public_path('productimage/'.$name_gen));
 
             $data->image = $name_gen;
@@ -542,7 +542,7 @@ class ProductController extends Controller
             $manager = new ImageManager(new Driver());
             $name_gen = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
             $img = $manager->read($file);
-            $img->resize(640, 480);
+            $img->resize(600, 750);
             $img->toJpeg(80)->save(public_path('productimage/'.$name_gen));
 
             $save_url = $name_gen;

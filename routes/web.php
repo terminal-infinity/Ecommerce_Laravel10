@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Home route
-Route::get('/',[HomeController::class,'Index'])->name('home.index');
+Route::get('/',[HomeController::class,'index'])->name('home.index');
+Route::get('/about',[HomeController::class,'about'])->name('home.about');
+Route::get('/shop',[HomeController::class,'shop'])->name('home.shop');
 
 
 // admin login route

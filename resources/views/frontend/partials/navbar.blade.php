@@ -7,23 +7,22 @@
                 
                 <!-- Logo desktop -->		
                 <a href="#" class="logo">
-                    <img src="images/icons/logo-02.png" alt="IMG-LOGO">
+                    <img src="{{ asset('frontend/images/icons/logo-02.png') }} " alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li>
-                            <a href="index.html">Home</a>
-                            <ul class="sub-menu">
-                                <li><a href="index.html">Homepage 1</a></li>
-                                <li><a href="home-02.html">Homepage 2</a></li>
-                                <li><a href="home-03.html">Homepage 3</a></li>
-                            </ul>
+                            <a href="{{ route('home.index') }}">Home</a>
                         </li>
 
                         <li>
-                            <a href="product.html">Shop</a>
+                            <a href="{{ route('home.about') }}">About</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('home.shop') }}">Shop</a>
                         </li>
 
                         <li class="label1" data-label1="hot">
@@ -35,16 +34,32 @@
                         </li>
 
                         <li>
-                            <a href="about.html">About</a>
-                        </li>
-
-                        <li>
                             <a href="contact.html">Contact</a>
                         </li>
 
+                        @if (Route::has('login'))
+                        @auth
+
                         <li>
-                            <a href="contact.html">Login</a>
+                            <a href="about.html">My Order</a>
                         </li>
+
+                            <form style="padding-left:15px" method="POST" action="{{ route('logout') }}">
+                            @csrf
+  
+                            <input style="background: transparent; color:aliceblue;" type="submit" value="Logout">
+                            </form>
+                        @else
+                        <li>
+                            <a href="{{ route('login') }}">Login</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('register') }}">Register</a>
+                        </li>
+  
+                        @endauth
+                        @endif
+
                     </ul>
                 </div>	
 
@@ -54,6 +69,9 @@
                         <div class="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
+                        <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+                            <i style="color: aliceblue;" class="zmdi zmdi-favorite-outline"></i>
+                        </a>
                     </div>
                         
                     <div class="flex-c-m h-full p-lr-19">
@@ -70,7 +88,7 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->		
         <div class="logo-mobile">
-            <a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+            <a href="index.html"><img src="{{ asset('frontend/images/icons/logo-01.png') }}" alt="IMG-LOGO"></a>
         </div>
 
         <!-- Icon header -->
@@ -95,19 +113,15 @@
     <div class="menu-mobile">
         <ul class="main-menu-m">
             <li>
-                <a href="index.html">Home</a>
-                <ul class="sub-menu-m">
-                    <li><a href="index.html">Homepage 1</a></li>
-                    <li><a href="home-02.html">Homepage 2</a></li>
-                    <li><a href="home-03.html">Homepage 3</a></li>
-                </ul>
-                <span class="arrow-main-menu-m">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                </span>
+                <a href="{{ route('home.index') }}">Home</a>
             </li>
 
             <li>
-                <a href="product.html">Shop</a>
+                <a href="{{ route('home.about') }}">About</a>
+            </li>
+
+            <li>
+                <a href="{{ route('home.shop') }}">Shop</a>
             </li>
 
             <li>
@@ -119,12 +133,30 @@
             </li>
 
             <li>
-                <a href="about.html">About</a>
-            </li>
-
-            <li>
                 <a href="contact.html">Contact</a>
             </li>
+            @if (Route::has('login'))
+            @auth
+
+            <li>
+                <a href="about.html">My Order</a>
+            </li>
+
+                <form style="padding-left:15px" method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <input style="background: transparent; color:aliceblue; padding:4px;" type="submit" value="Logout">
+                </form>
+            @else
+            <li>
+                <a href="{{ route('login') }}">Login</a>
+            </li>
+            <li>
+                <a href="{{ route('register') }}">Register</a>
+            </li>
+
+            @endauth
+            @endif
         </ul>
     </div>
 
@@ -161,7 +193,7 @@
         <div class="sidebar-content flex-w w-full p-lr-65 js-pscroll">
             <ul class="sidebar-link w-full">
                 <li class="p-b-13">
-                    <a href="index.html" class="stext-102 cl2 hov-cl1 trans-04">
+                    <a href="{{route('home.index')}}" class="stext-102 cl2 hov-cl1 trans-04">
                         Home
                     </a>
                 </li>
@@ -169,6 +201,12 @@
                 <li class="p-b-13">
                     <a href="#" class="stext-102 cl2 hov-cl1 trans-04">
                         My Wishlist
+                    </a>
+                </li>
+
+                <li class="p-b-13">
+                    <a href="#" class="stext-102 cl2 hov-cl1 trans-04">
+                        My Card
                     </a>
                 </li>
 
@@ -205,56 +243,56 @@
                 <div class="flex-w flex-sb p-t-36 gallery-lb">
                     <!-- item gallery sidebar -->
                     <div class="wrap-item-gallery m-b-10">
-                        <a class="item-gallery bg-img1" href="images/gallery-01.jpg" data-lightbox="gallery" 
-                        style="background-image: url('images/gallery-01.jpg');"></a>
+                        <a class="item-gallery bg-img1" href="{{ asset('frontend/images/gallery-01.jpg') }}" data-lightbox="gallery" 
+                        style="background-image: url('frontend/images/gallery-01.jpg');"></a>
                     </div>
 
                     <!-- item gallery sidebar -->
                     <div class="wrap-item-gallery m-b-10">
-                        <a class="item-gallery bg-img1" href="images/gallery-02.jpg" data-lightbox="gallery" 
-                        style="background-image: url('images/gallery-02.jpg');"></a>
+                        <a class="item-gallery bg-img1" href="{{ asset('frontend/images/gallery-02.jpg') }}" data-lightbox="gallery" 
+                        style="background-image: url('frontend/images/gallery-02.jpg');"></a>
                     </div>
 
                     <!-- item gallery sidebar -->
                     <div class="wrap-item-gallery m-b-10">
-                        <a class="item-gallery bg-img1" href="images/gallery-03.jpg" data-lightbox="gallery" 
-                        style="background-image: url('images/gallery-03.jpg');"></a>
+                        <a class="item-gallery bg-img1" href="{{ asset('frontend/images/gallery-03.jpg') }}" data-lightbox="gallery" 
+                        style="background-image: url('frontend/images/gallery-03.jpg');"></a>
                     </div>
 
                     <!-- item gallery sidebar -->
                     <div class="wrap-item-gallery m-b-10">
-                        <a class="item-gallery bg-img1" href="images/gallery-04.jpg" data-lightbox="gallery" 
-                        style="background-image: url('images/gallery-04.jpg');"></a>
+                        <a class="item-gallery bg-img1" href="{{ asset('frontend/images/gallery-04.jpg') }}" data-lightbox="gallery" 
+                        style="background-image: url('frontend/images/gallery-04.jpg');"></a>
                     </div>
 
                     <!-- item gallery sidebar -->
                     <div class="wrap-item-gallery m-b-10">
-                        <a class="item-gallery bg-img1" href="images/gallery-05.jpg" data-lightbox="gallery" 
-                        style="background-image: url('images/gallery-05.jpg');"></a>
+                        <a class="item-gallery bg-img1" href="{{ asset('frontend/images/gallery-05.jpg') }}" data-lightbox="gallery" 
+                        style="background-image: url('frontend/images/gallery-05.jpg');"></a>
                     </div>
 
                     <!-- item gallery sidebar -->
                     <div class="wrap-item-gallery m-b-10">
-                        <a class="item-gallery bg-img1" href="images/gallery-06.jpg" data-lightbox="gallery" 
-                        style="background-image: url('images/gallery-06.jpg');"></a>
+                        <a class="item-gallery bg-img1" href="{{ asset('frontend/images/gallery-06.jpg') }}" data-lightbox="gallery" 
+                        style="background-image: url('frontend/images/gallery-06.jpg');"></a>
                     </div>
 
                     <!-- item gallery sidebar -->
                     <div class="wrap-item-gallery m-b-10">
-                        <a class="item-gallery bg-img1" href="images/gallery-07.jpg" data-lightbox="gallery" 
-                        style="background-image: url('images/gallery-07.jpg');"></a>
+                        <a class="item-gallery bg-img1" href="{{ asset('frontend/images/gallery-07.jpg') }}" data-lightbox="gallery" 
+                        style="background-image: url('frontend/images/gallery-07.jpg');"></a>
                     </div>
 
                     <!-- item gallery sidebar -->
                     <div class="wrap-item-gallery m-b-10">
-                        <a class="item-gallery bg-img1" href="images/gallery-08.jpg" data-lightbox="gallery" 
-                        style="background-image: url('images/gallery-08.jpg');"></a>
+                        <a class="item-gallery bg-img1" href="{{ asset('frontend/images/gallery-08.jpg') }}" data-lightbox="gallery" 
+                        style="background-image: url('frontend/images/gallery-08.jpg');"></a>
                     </div>
 
                     <!-- item gallery sidebar -->
                     <div class="wrap-item-gallery m-b-10">
-                        <a class="item-gallery bg-img1" href="images/gallery-09.jpg" data-lightbox="gallery" 
-                        style="background-image: url('images/gallery-09.jpg');"></a>
+                        <a class="item-gallery bg-img1" href="{{ asset('frontend/images/gallery-09.jpg') }}" data-lightbox="gallery" 
+                        style="background-image: url('frontend/images/gallery-09.jpg');"></a>
                     </div>
                 </div>
             </div>
