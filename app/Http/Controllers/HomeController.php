@@ -64,31 +64,24 @@ class HomeController extends Controller
         else{
             $product = Product::where('status', '1')->paginate(20);
         }
-
-        /* if($request->category){
-            $product = Product::where('category', $request->category)->paginate(15)->withQueryString();
-        }else{
-            $Product = Product::orderBy('created_at','DESC')->paginate(15);
-        }
-        if($request->brand){
-            $product = Product::where('brand', $request->brand)->paginate(15)->withQueryString();
-        }else{
-            $Product = Product::orderBy('created_at','DESC')->paginate(15);
-        } */
     
         return view('frontend.pages.shop', compact('product', 'category','brand'));
     }
     
 
     // product details method
-    public function product_details($id){
+    public function product_details( $id){
         $product = Product::findOrfail($id);
+        $relatedproduct = Product::where('category', $product->category)
+        ->where('id', '!=', $id)
+        ->paginate(15)
+        ->withQueryString();
         $images = ProductImage::where('product_id',$id)->get();
         $colour = ProductColour::where('status','1')->get();
         $size = ProductSize::all();
         $selectedColors = explode(', ', $product->color);
         $selectedSize = explode(', ', $product->size);
-        return view('frontend.pages.product_details',compact('product','colour','size','selectedColors','selectedSize','images'));
+        return view('frontend.pages.product_details',compact('product','colour','size','selectedColors','selectedSize','images','relatedproduct'));
     }
 
 }
