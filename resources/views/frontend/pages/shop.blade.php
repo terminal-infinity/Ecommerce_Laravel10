@@ -7,7 +7,7 @@
         Shop
     </h2>
 </section>	
-<section class="p-5">
+
     @include('frontend.pages.partials.product')
-</section>
+
 @endsection

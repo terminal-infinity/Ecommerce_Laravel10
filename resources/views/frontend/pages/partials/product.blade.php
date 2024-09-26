@@ -8,14 +8,18 @@
 
         <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+                <a href="{{ route('home.shop') }}">
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1">
                     All Products
                 </button>
+                </a>
                 @foreach ($category as $category_item)
                 @if ($category_item != '')
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 " data-filter="">
+                <a href="{{ route('home.shop' , ['category' => $category_item->name ,  'brand' => request('brand')] ) }}">
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ">
                     {{ $category_item->name }}
                 </button>
+                </a>
                 @endif
                 @endforeach
             </div>
@@ -55,38 +59,20 @@
 
                         <ul>
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="{{ URL::current() }}" class="filter-link stext-106 trans-04 filter-link-active">
                                     Default
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Popularity
+                                <a href="{{ URL::current()."?sort=popular" }}" class="filter-link stext-106 trans-04">
+                                    Popural Product
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Average rating
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                    Newness
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Price: Low to High
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Price: High to Low
+                                <a href="{{ URL::current()."?sort=newest" }}" class="filter-link stext-106 trans-04">
+                                    Newest Product
                                 </a>
                             </li>
                         </ul>
@@ -99,38 +85,20 @@
 
                         <ul>
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                <a href="{{ URL::current() }}" class="filter-link stext-106 trans-04 filter-link-active">
                                     All
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    $0.00 - $50.00
+                                <a href="{{ URL::current()."?sort=price_asc" }}" class="filter-link stext-106 trans-04">
+                                    Price: Low to High
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    $50.00 - $100.00
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    $100.00 - $150.00
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    $150.00 - $200.00
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    $200.00+
+                                <a href="{{ URL::current()."?sort=price_desc" }}" class="filter-link stext-106 trans-04">
+                                    Price: High to Low
                                 </a>
                             </li>
                         </ul>
@@ -138,69 +106,24 @@
 
                     <div class="filter-col3 p-r-15 p-b-27">
                         <div class="mtext-102 cl2 p-b-15">
-                            Color
+                            Brand
                         </div>
 
                         <ul>
                             <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #222;">
-                                    <i class="zmdi zmdi-circle"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Black
+                                <a href="{{ route('home.shop')}}" class="filter-link stext-106 trans-04">
+                                    All
                                 </a>
                             </li>
-
+                            @foreach ($brand as $brand_item)
+                            @if ($brand_item != '')
                             <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-                                    <i class="zmdi zmdi-circle"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                    Blue
+                                <a href="{{ route('home.shop' , ['brand' => $brand_item->name , 'category' => request('category')] ) }}" class="filter-link stext-106 trans-04">
+                                    {{ $brand_item->name }}
                                 </a>
                             </li>
-
-                            <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-                                    <i class="zmdi zmdi-circle"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Grey
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-                                    <i class="zmdi zmdi-circle"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Green
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-                                    <i class="zmdi zmdi-circle"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Red
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-                                    <i class="zmdi zmdi-circle-o"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    White
-                                </a>
-                            </li>
+                            @endif
+                            @endforeach
                         </ul>
                     </div>
 
@@ -244,20 +167,25 @@
                     <div class="block2-pic hov-img0 label-new" data-label="New">
                         <img src="/productimage/{{$product_item->image}}" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            Quick View
+                        <a href="{{ route('home.product_details',$product_item->id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 {{-- js-show-modal1 --}}">
+                            Add To Cart
                         </a>
                     </div>
 
                     <div class="block2-txt flex-w flex-t p-t-14">
                         <div class="block2-txt-child1 flex-col-l ">
-                            <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                            <a href="{{ route('home.product_details',$product_item->id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                 {{ $product_item->title }}
                             </a>
 
                             <span class="stext-105 cl3">
-                                {{ $product_item->price }}
+                                ${{ $product_item->price }}
                             </span>
+                            <a href="{{ route('home.product_details',$product_item->id) }}">
+                                <button style="margin-top: 0.5cm; margin-left: 1cm;" class="flex-c-m stext-103 cl0 size-102 bg1 bor2 hov-btn1 p-15 trans-04">
+                                View Details
+                            </button>
+                        </a>
                         </div>
 
                         <div class="block2-txt-child2 flex-r p-t-3">
